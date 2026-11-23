@@ -1,0 +1,19 @@
+
+#include <stdio.h>
+
+struct account { int number; float balance; };
+
+void showAddress(struct account a)
+{
+    printf("Address inside function: %p\n", (void *)&a);
+}
+
+int main(void)
+{
+    struct account list[1] = {{101, 5000}};
+    printf("Address in main: %p\n", (void *)&list[0]);
+    showAddress(list[0]);
+    return 0;
+}
+
+
