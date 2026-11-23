@@ -1,0 +1,92 @@
+int auto_token(void)
+{
+    int token = 1000;
+    return ++token;
+}
+
+
+==============================================================================
+TASK 5 – STATIC LOCAL COUNTER
+==============================================================================
+
+int next_token(void)
+{
+    static int token = 1000;
+    return ++token;
+}
+
+
+==============================================================================
+TASK 5 – GLOBAL COUNTER SHARED USING EXTERN: token.c
+==============================================================================
+
+int token = 1000;
+
+int next_token(void)
+{
+    return ++token;
+}
+
+
+==============================================================================
+TASK 5 – GLOBAL COUNTER SHARED USING EXTERN: main.c
+==============================================================================
+
+#include <stdio.h>
+
+extern int token;
+int next_token(void);
+
+int main(void)
+{
+    printf("Global: %d %d %d\n",
+           next_token(), next_token(), next_token());
+    return 0;
+}
+
+
+==============================================================================
+TASK 5 – COMPLETE TODO 1 PROGRAM
+==============================================================================
+
+#include <stdio.h>
+
+int next_token(void)
+{
+    static int token = 1000;
+    return ++token;
+}
+
+int auto_token(void)
+{
+    int token = 1000;
+    return ++token;
+}
+
+int main(void)
+{
+    int s1 = next_token(), s2 = next_token(), s3 = next_token();
+    int a1 = auto_token(), a2 = auto_token(), a3 = auto_token();
+
+    printf("static: %d %d %d\n", s1, s2, s3);
+    printf("auto : %d %d %d\n", a1, a2, a3);
+    return 0;
+}
+
+
+==============================================================================
+TASK 5 – REGISTER VARIABLE LOOP
+==============================================================================
+
+#include <stdio.h>
+
+int main(void)
+{
+    register int i;
+    int token = 1000;
+
+    for (i = 0; i < 3; i++)
+        printf("Token: %d\n", ++token);
+
+    return 0;
+}
