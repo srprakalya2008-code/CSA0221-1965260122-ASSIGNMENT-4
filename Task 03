@@ -1,0 +1,61 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+enum kind { TEMPERATURE, HUMIDITY, STATUS };
+
+struct packet {
+    enum kind type;
+    void *data;
+};
+
+int main(void)
+{
+    struct packet p;
+    p.type = TEMPERATURE;
+    p.data = malloc(sizeof(float));
+
+    if (p.data == NULL)
+        return 1;
+
+    *(float *)p.data = 31.5f;
+    printf("Temperature = %.1f C\n", *(float *)p.data);
+
+    free(p.data);
+    return 0;
+}
+
+
+==============================================================================
+TASK 4 – CORRECTED BANK ACCOUNT PROGRAM (COMPLETE)
+==============================================================================
+
+#include <stdio.h>
+
+struct account {
+    int number;
+    float balance;
+};
+
+void addInterest(struct account *a, float rate)
+{
+    a->balance = a->balance + a->balance * rate / 100;
+}
+
+int main(void)
+{
+    struct account list[3] = {
+        {101, 5000}, {102, 12000}, {103, 800}
+    };
+    struct account *p = list;
+
+    for (int i = 0; i < 3; i++)
+        addInterest(&list[i], 4);
+
+    printf("Account Number\tBalance\n");
+    for (int i = 0; i < 3; i++) {
+        printf("%d\t\t%.2f\n", (p + i)->number, (p + i)->balance);
+    }
+
+    return 0;
+}
+
